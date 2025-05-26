@@ -1,0 +1,13 @@
+services:
+  nginx:
+    build: ./requirements/nginx
+    container_name: nginx
+    volumes:
+      - wordpress_files:/var/www./html:ro
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    networks:
+      - inception
+    restart: always
