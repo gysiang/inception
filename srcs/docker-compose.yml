@@ -11,3 +11,31 @@ services:
     networks:
       - inception
     restart: always
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: wordpress
+    volumes:
+      - wordpress_files:/var/www/html
+    expose:
+      - "9000"
+    depends_on:
+      - mariadb
+    networks:
+      - inception
+    restart: always
+  mariadb:
+    build: ./requirements/mariadb
+    container_name: mariadb
+    volumes:
+      - mariadb_data:/var/lub/mysql
+    enviroment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    networks:
+      - inception
+    restart: always
+  volumes:
+    mariadb_data:
+    wordpress_files:

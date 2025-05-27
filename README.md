@@ -1,18 +1,15 @@
 # inception
 
-##1. Project Setup
+**1. Project Setup**
 
 - [ ] Create a Virtual Machine for development.
 - [ ] Set up the working directory structure:
 </br>
-.
+
 ├── Makefile</br>
-
 ├── secrets/</br>
-
 ├── srcs/</br>
-
-    ├── docker-compose.yml
+    ├── docker-compose.yml</br>
     ├── .env
     ├── requirements/
         ├── mariadb/
@@ -74,3 +71,12 @@
 - [ ] Clean repository of sensitive data (e.g., add secrets/* to .gitignore).
 - [ ] Submit everything via Git repository as per instructions.
 - [ ] Double-check all file and folder names are correct.
+
+My Notes
+1. docker build -t nginx-inception .
+2. docker run -d --name nginx-inception -p 8443:443 nginx-inception
+3. curl -k https://localhost:8443
+docker stop
+docket ps -a
+docker rm container-name
+

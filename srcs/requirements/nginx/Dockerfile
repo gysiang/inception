@@ -1,13 +1,16 @@
 FROM alpine:latest
 
-RUN apk update && apk add nginx
+# Install nginx and openssl
+RUN apk update && apk add nginx openssl
 
 # Create the folders
-RUN mkdir -p /etc.nginx/ssl /run/nginx
+RUN mkdir -p /etc/nginx/ssl /run/nginx
 
-# Copy SSL Cert and NGINX config
-COPY ./certs/yourdomain.crt /etc/nginx/ssl/yourdomain.crt
-COPY ./certs/yourdomain.crt /etc/nginx/ssl/yourdomain.key
+# Generate the self signed certs
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /etc/nginx/ssl/gyong-si.42.fr.key \
+  -out /etc/nginx/ssl/gyong-si.42.fr.crt \
+  -subj "/C=SG/ST=State/L=City/O=School/OU=42/CN=gyong-si.42.fr"
 
 # Expose HTTPS port
 EXPOSE 443
