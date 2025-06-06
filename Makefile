@@ -1,6 +1,7 @@
 all : up
 
 up :
+	./srcs/setup.sh
 	@docker-compose -f ./srcs/docker-compose.yml up -d
 
 down :
@@ -16,7 +17,7 @@ status :
 	@docker ps -a
 
 clean :
-	@docker system prune -f
+	./srcs/cleanup.sh
 
 logs :
 	@docker-compose -f ./srcs/docker-compose.yml logs -f
