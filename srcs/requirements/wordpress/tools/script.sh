@@ -33,6 +33,7 @@ fi
 # Check if WordPress is already installed
 if ! wp core is-installed --allow-root; then
     echo "🚀 Installing WordPress..."
+    echo "👤 Creating admin user..."
     wp core install \
         --url="$DOMAIN_NAME" \
         --title="Inception - 42" \
@@ -40,6 +41,11 @@ if ! wp core is-installed --allow-root; then
         --admin_password="$WP_ADMIN_PASSWORD" \
         --admin_email="$WP_ADMIN_EMAIL" \
         --skip-email \
+        --allow-root
+    echo "👤 Creating visitor user..."
+    wp user create "$DB_VISITOR" "visitor@example.com" \
+        --role=subscriber \
+        --user_pass="$DB_VISITORPASS" \
         --allow-root
 else
     echo "✅ WordPress is already installed."

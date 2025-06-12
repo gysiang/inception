@@ -1,25 +1,15 @@
-FROM php:8.1-fpm
+# Copy script
+COPY script.sh /usr/local/bin/script.sh
+COPY .env /var/www/html/.env
 
-# install dep
-RUN apt update && apt-get install -y  \
-    wget \
-    unzip \
-    mariadb-client\
-    && docker-php-ext-install mysqli pdo pdo_mysql
+# Make it executable
+RUN chmod +x /usr/local/bin/script.sh
 
-# Download and extract wordpress
-RUN mkdir -p /var/www/html
-
+# Set working dir
 WORKDIR /var/www/html
 
-RUN wget https://wordpress.org/latest.zip && \
-    unzip latest.zip && \
-    mv wordpress/* . && \
-    rm -rf wordpress latest.zip
-
-# set permissions
-RUN chown -R www-data:www-data /var/www/html
-
+# Expose port
 EXPOSE 9000
 
-CMD ["php-fpm"]
+# Use custom entrypoint
+ENTRYPOINT ["/usr/local/bin/script.sh"]
