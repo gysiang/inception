@@ -3,7 +3,7 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     volumes:
-      - wordpress_files:/var/www./html:ro
+      - wordpress_files:/var/www/html:ro
     ports:
       - "443:443"
     depends_on:
@@ -11,6 +11,7 @@ services:
     networks:
       - inception
     restart: always
+
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
@@ -23,12 +24,13 @@ services:
     networks:
       - inception
     restart: always
+
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb
     volumes:
-      - mariadb_data:/var/lub/mysql
-    enviroment:
+      - mariadb_data:/var/lib/mysql
+    environment:
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
       - MYSQL_DATABASE=${DB_NAME}
       - MYSQL_USER=${DB_USER}
@@ -36,6 +38,10 @@ services:
     networks:
       - inception
     restart: always
-  volumes:
-    mariadb_data:
-    wordpress_files:
+
+volumes:
+  mariadb_data:
+  wordpress_files:
+
+networks:
+  inception:
