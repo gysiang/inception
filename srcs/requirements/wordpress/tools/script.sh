@@ -1,7 +1,7 @@
 #!/bin/bash
 
+echo "🔧 script.sh has started running"
 # Load env variables
-source /var/www/html/.env
 
 # Set working dir
 cd /var/www/html
@@ -51,4 +51,4 @@ else
     echo "✅ WordPress is already installed."
 fi
 
-exec "$@"
+exec php-fpm

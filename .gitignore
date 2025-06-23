@@ -1,3 +1,2 @@
 srcs/requirements/nginx/certs/
 secrets/
-srcs/.env
