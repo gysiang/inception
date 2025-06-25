@@ -1,5 +1,5 @@
 -- Select the database to use (created via MYSQL_DATABASE)
-CREATE DATABASE IF NOT EXISTS wp_database;
+CREATE DATABASE IF NOT EXISTS wordpress_db;
 
 -- Admin user (must NOT contain "admin" in any form)
 CREATE USER IF NOT EXISTS 'wp_user'@'%' IDENTIFIED BY 'wp_pass';

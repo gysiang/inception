@@ -17,8 +17,8 @@ http {
 		ssl_certificate_key /etc/nginx/ssl/gyong-si.42.fr.key;
 		ssl_protocols       TLSv1.2 TLSv1.3;
 
-		index index.php;
 		root /var/www/html;
+		index index.php index.html;
 
 		location / {
 			try_files $uri $uri/ =404;
