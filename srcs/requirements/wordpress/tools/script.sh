@@ -1,26 +1,16 @@
 #!/bin/bash
 
 echo "🔧 script.sh has started running"
-# Load env variables
 
 set -e
 
-echo "⏳ Waiting for mariadb..."
-while ! mysqladmin ping -h"mariadb" --silent; do
-    sleep 1
-done
-echo "✅ mariadb is ready."
-
-# Use php with increased memory limit for all wp commands
 PHP_WP="php -d memory_limit=256M $(which wp) --allow-root"
 
-echo "Creating database if it does not exist..."
-mysql -hmariadb -uroot -p"$MARIADB_ROOT_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS $MARIADB_NAME;"
-
-echo "Granting privileges to wp user..."
-mysql -hmariadb -uroot -p"$MARIADB_ROOT_PASSWORD" -e "CREATE USER IF NOT EXISTS '$MARIADB_USER'@'%' IDENTIFIED BY '$MARIADB_PASSWORD';"
-mysql -hmariadb -uroot -p"$MARIADB_ROOT_PASSWORD" -e "GRANT ALL PRIVILEGES ON $MARIADB_NAME.* TO '$MARIADB_USER'@'%';"
-mysql -hmariadb -uroot -p"$MARIADB_ROOT_PASSWORD" -e "FLUSH PRIVILEGES;"
+echo "⏳ Waiting for MariaDB to be ready..."
+until mysqladmin ping -hmariadb --silent; do
+    echo "❌ MariaDB not ready yet, retrying..."
+    sleep 2
+done
 
 # Ensure WordPress core is present
 if [ ! -f /var/www/html/wp-load.php ]; then
@@ -47,5 +37,4 @@ wp user create visitor visitor@example.com --user_pass=$WP_VISITOR --role=subscr
 
 echo "✅ WordPress setup complete!"
 
-# Run PHP-FPM
-exec php-fpm
+exec php-fpm8.2 -F
