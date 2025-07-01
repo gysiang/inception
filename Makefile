@@ -1,6 +1,7 @@
 all : up
 
 up :
+	./srcs/setup.sh
 	@docker compose -f ./srcs/docker-compose.yml up -d
 
 down :
