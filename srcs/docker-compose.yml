@@ -34,6 +34,8 @@ services:
       - mariadb_data:/var/lib/mysql
     env_file:
       - ../secrets/.env
+    expose:
+      - "3306"
     networks:
       - inception
     restart: always

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-env | grep -E 'MARIADB|WP_' | sort
+#env | grep -E 'MARIADB|WP_' | sort
 
 echo "🚀 Starting MariaDB in background..."
 mysqld_safe --datadir=/var/lib/mysql &

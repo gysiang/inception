@@ -1,7 +1,6 @@
 #!/bin/bash
 
 echo "🔧 script.sh has started running"
-
 set -e
 
 PHP_WP="php -d memory_limit=256M $(which wp) --allow-root"
@@ -27,13 +26,13 @@ fi
 
 if ! $PHP_WP core is-installed; then
 	echo "🚀 Installing WordPress..."
-	$PHP_WP core install --url=$DOMAIN_NAME --title="MySite" --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN --admin_email=$WP_ADMIN_EMAIL
+	$PHP_WP core install --url=$DOMAIN_NAME --title="MySite" --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL
 else
   echo "WordPress is already installed, skipping installation."
 fi
 
 echo "👤 Creating visitor user..."
-wp user create visitor visitor@example.com --user_pass=$WP_VISITOR --role=subscriber --allow-root
+wp user create visitor visitor@example.com --user_pass=$WP_VISITORPASS --role=subscriber --allow-root
 
 echo "✅ WordPress setup complete!"
 

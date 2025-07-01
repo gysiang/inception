@@ -1,4 +1,4 @@
-HOST_ENTRY="127.0.0.1 gyong-si.42.fr"
+HOST_ENTRY="10.0.2.15 gyong-si.42.fr"
 
 if ! grep -q "$HOST_ENTRY" /etc/hosts; then
     echo "Adding $HOST_ENTRY to /etc/hosts"
