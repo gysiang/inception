@@ -31,9 +31,13 @@ else
   echo "WordPress is already installed, skipping installation."
 fi
 
-echo "👤 Creating visitor user..."
-wp user create visitor visitor@example.com --user_pass=$WP_VISITORPASS --role=subscriber --allow-root
+echo "👤 Checking visitor user..."
+if ! $PHP_WP user get visitor > /dev/null 2>&1; then
+    echo "👤 Creating visitor user..."
+    $PHP_WP user create visitor visitor@example.com --user_pass=$WP_VISITORPASS --role=subscriber
+else
+    echo "✅ Visitor user already exists."
+fi
 
 echo "✅ WordPress setup complete!"
-
 exec php-fpm8.2 -F
