@@ -42,7 +42,15 @@ services:
 
 volumes:
   mariadb_data:
+    driver_opts:
+      type: 'none'
+      o: bind
+      device: /home/gyong-si/data/mariadb
   wordpress_files:
+    driver_opts:
+      type: 'none'
+      o: bind
+      device: /home/gyong-si/data/wordpress
 
 networks:
   inception:
