@@ -1,5 +1,5 @@
 # inception
-
+https://forum.openmediavault.org/index.php?thread/51721-502-bad-gateway/&postID=400465#post400465
 **1. Project Setup**
 
 - [ ] Create a Virtual Machine for development.
@@ -79,4 +79,3 @@ My Notes
 docker stop
 docket ps -a
 docker rm container-name
-
