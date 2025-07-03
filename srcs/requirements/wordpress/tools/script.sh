@@ -11,12 +11,6 @@ until mysqladmin ping -hmariadb --silent; do
     sleep 2
 done
 
-# Ensure WordPress core is present
-if [ ! -f /var/www/html/wp-load.php ]; then
-	echo "📥 Downloading WordPress core..."
-	$PHP_WP core download --allow-root
-fi
-
 if [ ! -f /var/www/html/wp-config.php ]; then
 	echo "⚙️ Generating wp-config.php..."
 	$PHP_WP config create --dbname=$MARIADB_NAME --dbuser=$MARIADB_USER --dbpass=$MARIADB_PASSWORD --dbhost=mariadb --allow-root

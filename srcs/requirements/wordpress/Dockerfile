@@ -20,6 +20,8 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 RUN mkdir -p /var/www/html && \
     chown -R www-data:www-data /var/www/html
 
+RUN wp core download --allow-root
+
 COPY tools/script.sh /usr/local/bin/script.sh
 RUN chmod +x /usr/local/bin/script.sh
 
